@@ -9,6 +9,11 @@
 * [Overview](#overview)
 * [Importing Data](#importing-data)
 
+`npm install -g augmentable-cli`
+
+- or -
+
+`yarn add augmentable-cli --global`
 
 ## Overview
 
