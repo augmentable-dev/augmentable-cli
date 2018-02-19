@@ -1,0 +1,27 @@
+{
+  "name": "augmentable-cli",
+  "version": "0.1.0",
+  "description": "CLI for working with CSV files by importing into SQLite",
+  "bin": {
+    "augmentable": "./cli.js",
+    "aug": "./cli.js",
+    "augmentable-sql": "./sql.js",
+    "aug-sql": "./sql.js"
+  },
+  "author": "Patrick DeVivo <patrick@augmentable.io>",
+  "license": "MIT",
+  "private": false,
+  "preferGlobal": true,
+  "dependencies": {
+    "caporal": "^0.9.0",
+    "chalk": "^2.3.1",
+    "cli-table2": "^0.2.0",
+    "console-png": "^1.2.1",
+    "csv-sqlite": "^0.1.1",
+    "fast-glob": "^2.0.4",
+    "inquirer": "^5.1.0",
+    "moment": "^2.20.1",
+    "numbro": "^2.0.5",
+    "ora": "^1.4.0"
+  }
+}
