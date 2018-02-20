@@ -380,12 +380,12 @@ prog
       
       let tableName = args.table
       if (!tableName) {
-          pn  = await inquirer.prompt({
+          tn  = await inquirer.prompt({
               type: 'input',
               name: 'tableName',
               message: 'Table name'
           })
-          tableName = pn.tableName
+          tableName = tn.tableName
           if (!tableName){
               logger.info("No Table name provided");
               return;
