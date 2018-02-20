@@ -360,6 +360,74 @@ prog
             rows = csvSQLite.run(dbFilePath, sql)
         }
     })
-
+    
+prog
+    .command('tables:columns', 'List columns in a table.')
+    .argument('[project]', 'The name of the project the table is in')
+    .argument('[table]', 'Name of the table to list columns of')  
+    .option('--simple-output', 'Display columns in a csv list', prog.BOOL)  
+    .action(async function(args, options, logger) {
+      let projectName = args.project
+      if (!projectName) {
+          pn  = await inquirer.prompt([{
+              type: 'list',
+              name: 'projectName',
+              message: 'Select Project',
+              choices: projectFiles.map(p => path.basename(p.path, '.sqlite'))
+          }])
+          projectName = pn.projectName
+      }
+      
+      let tableName = args.table
+      if (!tableName) {
+          tn  = await inquirer.prompt({
+              type: 'input',
+              name: 'tableName',
+              message: 'Table name'
+          })
+          tableName = tn.tableName
+          if (!tableName){
+              logger.info("No Table name provided");
+              return;
+          }
+      }
+      
+      const dbFilePath = path.join(projectsPath, `${projectName}.sqlite`)
+      
+      const tableInfo = csvSQLite.prepare(dbFilePath, `PRAGMA table_info(${tableName})`)
+      
+      if (!tableInfo.length){
+        logger.info("Table not found");
+        return;
+      }
+      
+      if (options.simpleOutput) {
+          logger.info([
+              'Column Name',
+              'Column Type'
+          ].join(','))
+          tableInfo.forEach(column => {
+              logger.info([
+                  column.name,
+                  column.type
+              ].join(','))
+          })
+      }
+      else {
+          const table = new Table({
+              head: ['Column Name', 'Column Type'],
+              style: {
+                  head: []
+              }
+          })
+          tableInfo.forEach(column => {
+              table.push([
+                  column.name,
+                  column.type
+              ])
+          })
+          logger.info(table.toString())
+      }
+    })
 
 prog.parse(process.argv);
