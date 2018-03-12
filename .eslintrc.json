@@ -1,0 +1,25 @@
+{
+    "env": {
+        "node": true
+    },
+    "parserOptions": { "ecmaVersion": 2017 },
+    "extends": "eslint:recommended",
+    "rules": {
+        "indent": [
+            "warn",
+            4
+        ],
+        "linebreak-style": [
+            "warn",
+            "unix"
+        ],
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "semi": [
+            "warn",
+            "never"
+        ]
+    }
+}
